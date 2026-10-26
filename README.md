@@ -43,7 +43,7 @@ that is not the same as spendable balance. Activity shows local outgoing attempt
 not incoming history. **Node-reported inclusion is not a finality guarantee.** After a timeout or crash,
 check the node/recipient before retrying to avoid a duplicate payment.
 
-### v0.1.5 fund categories, delegation unfreeze and creator tips
+### v0.1.5 fund categories, delegation unfreeze 
 
 **Balance details** on Overview and Receive:
 - **Spendable:** the official own-output scan's plain `siglock` category, before
