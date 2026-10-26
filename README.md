@@ -1,4 +1,5 @@
 Proxima desktop wallet (Windows 10 / 11 x64)
+
 The independent app in proxima-wallet/ wraps the official proxi wallet engine, pinned to upstream commit 8a424c8e3436a0624f40c1f3d56cb6f2e817f084. It is unofficial, experimental, unsigned, and not independently audited. Proxima is in pre-launch: the network may stop or reset without notice and its tokens can cease to exist. Do not treat this build as a production wallet.
 
 Download and use
