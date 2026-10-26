@@ -1,0 +1,62 @@
+{
+  "name": "proxima-desktop-wallet",
+  "version": "0.1.5",
+  "private": true,
+  "description": "Unofficial experimental Proxima desktop wallet for Windows 10 and 11",
+  "author": "Proxima Desktop contributors",
+  "license": "MIT",
+  "main": "desktop/main.cjs",
+  "scripts": {
+    "postinstall": "node node_modules/electron/install.js",
+    "start": "electron .",
+    "test": "node --test tests/*.test.cjs",
+    "test:ui": "node scripts/test-ui.cjs",
+    "test:desktop": "node scripts/test-desktop.cjs",
+    "native": "node scripts/build-native.cjs",
+    "native:win": "node scripts/build-native.cjs win32",
+    "pack:win": "electron-builder --win zip --x64",
+    "installer:win": "electron-builder --win nsis --x64"
+  },
+  "dependencies": {
+    "qrcode": "1.5.4"
+  },
+  "devDependencies": {
+    "electron": "45.0.0",
+    "electron-builder": "26.18.0",
+    "playwright": "1.64.1"
+  },
+  "build": {
+    "appId": "community.proxima.desktop",
+    "productName": "Proxima Wallet",
+    "asar": true,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "desktop/**",
+      "ui/**",
+      "package.json",
+      "LICENSE"
+    ],
+    "extraResources": [
+      {
+        "from": "bin/win32",
+        "to": "native"
+      }
+    ],
+    "win": {
+      "target": [
+        "zip",
+        "nsis"
+      ],
+      "signAndEditExecutable": false,
+      "artifactName": "Proxima-Wallet-${version}-Windows-x64.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}
