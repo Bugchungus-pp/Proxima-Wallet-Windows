@@ -1,5 +1,3 @@
-Hello World
-who you?
 
 ## Proxima desktop wallet (Windows 10 / 11 x64)
 
