@@ -85,12 +85,6 @@ check the node/recipient before retrying to avoid a duplicate payment.
    is stopped only after an authorized successful submission receipt is observed.
    Timeouts after approval remain uncertain; check the node before trying again.
 
-**Support me** at the bottom displays the creator's user-supplied tip address:
-`a/2ca32c1108befd9ff2e84ffa054bb8804c90054320faccc729b9c33b5614eebe`.
-Copy address copies that exact value. Leave a tip opens Send with that recipient and
-an empty amount; it does not send automatically, charge hidden fees, or change any
-other payment's recipient. Tips are voluntary, go to the creator rather than the
-Proxima network, and follow the normal 10 PROX minimum and actual transaction fee.
 
 Passed 36 Node tests plus Electron regressions for real key/session handling,
 production balance parsing with mocked CLI reports, early-stop/withdrawal approval
@@ -99,90 +93,6 @@ approval, uncertain outcomes, failed scan handling and tip copy/prefill. Respons
 UI tests passed and screenshots were reviewed. No live delegation or funded transfer
 was performed; actual Windows runtime remains unverified. The ZIP was checked for
 CRC integrity, expected resources, matching source and absence of wallet/test files.
-
-### v0.1.4 session unlock, Proxima branding and LRB slots
-
-- Enter the desktop-wallet password **once when opening the wallet**. Creation or
-  import opens the first session using the password just chosen. Sending no longer
-  has a password field; recipient/amount/fee confirmations are still mandatory.
-- A memory-only credential buffer in Electron's main process supplies the official
-  signing engine. It is never saved to a password file, browser storage, settings,
-  or history and is never returned to the renderer. The keystore remains encrypted.
-  The session buffer is overwritten on lock; JavaScript/OS memory copies cannot be
-  reliably erased. Malware/admin access and OS memory dumps remain risks. This
-  convenience keeps signing access available longer than per-send authentication:
-  do not leave an unlocked wallet unattended.
-- **Lock wallet**, close, PC lock, sleep, or a renderer reload ends the session.
-  Reopening/re-unlocking requires the password again. Main-process guards reject
-  wallet operations while locked; history/address/QR are withheld and polling stops.
-  In-flight signing is cancelled on OS lock. If a submission was already approved,
-  check its outcome before retrying; locking cannot reverse a submitted transfer.
-- New light interface, restrained red accents, clearer cards, and the original
-  Proxima logo supplied by the user. The app remains an **unofficial** community
-  wallet; using the logo does not imply endorsement.
-- Overview and Receive display the node-reported **latest reliable branch (LRB)
-  slot**, refreshed in the existing 3-second cycle. It is decoded from the first
-  four bytes (unsigned big-endian) of the API's branch ID, following the pinned
-  upstream `ledger/base/id.go` and `ledger_time.go`. Branch tick/sequencer encoding
-  is checked. Missing, invalid, or offline results display **—**, not a made-up
-  slot. This adds no extra network requests and is not a finality/sync guarantee.
-- Passed 30 Node tests plus desktop and responsive UI tests. Desktop tests use real
-  key verification with simulated outbound sends, exercise imported wallets,
-  locked IPC, PC lock/sleep/reload/restart, lock-during-unlock/confirmation races,
-  password-free UI sends and password absence from app data/state. Screenshots
-  were reviewed. Actual Windows runtime and live funded transfers remain untested.
-
-### v0.1.3 send and backup fix (previous release)
-
-Per-send password entry from v0.1.3 is superseded by v0.1.4 session unlock.
-
-- Sending no longer depends on the backup-saved flag, including for already-imported
-  development-client wallets. No backup file picker or export is needed to send.
-- Send still verifies the local password and requires the native recipient/fee
-  confirmations. Wrong or empty passwords do not reach the transaction engine.
-- Optional backup export copies the already-encrypted `.key` file without asking
-  for a password or decrypting it. The saved copy is read back and compared; this
-  is not a password-recovery/decryption test. Recovery still needs the password.
-- **Password distinction:** the source file password is used only during import.
-  The new desktop-wallet password chosen during import encrypts this app's local
-  copy and is required to unlock future sessions or restore backups. Even plaintext imports get an
-  encrypted local copy; leaving the source password blank does not make the local
-  wallet passwordless. No password reset or encryption bypass is provided.
-- Existing wallet data is reused on update. No reimport, password change, or backup
-  export is required to enable sending. Do not delete your app-data directory.
-- Regression tests cover no-backup sends after create, encrypted import with a
-  different local password, and plaintext TXT import; reject wrong/empty/source
-  passwords; retain confirmation cancellation/approval; and ensure Send never opens
-  a file dialog. Native key verification is real; outbound CLI execution is mocked
-  only in the excluded test entry. No live transfers or Windows runtime tests.
-
-### v0.1.2 automatic refresh and transaction details
-
-- Checks every **3 seconds** while the window is visible. Slow requests never
-  overlap; checks pause while hidden and resume when the window becomes visible.
-- Lightweight read-only output fingerprints avoid launching the full CLI on every
-  tick. The official witness-checking balance command runs when outputs change,
-  on manual refresh, or after 30 seconds with a responsive node. Slow/failed
-  native checks use bounded timeouts and retry backoff (up to 30 seconds).
-- Foreground actions cancel background work before proceeding. Automatic reads
-  do not clear passwords, reset forms, block navigation, or trigger signing.
-  Profile and QR generation are cached, and history is written only on transitions.
-- Receive shows total controlled balance, output count, pending/uncertain outgoing
-  counts, last check and balance-verification times, primary node, observed branch,
-  backup status and recent outgoing transaction IDs. Offline data is marked stale,
-  not silently replaced with zero.
-- Up to two recorded transactions per cycle are checked on the node originally
-  used for submission (only when it is the currently configured node). Checks
-  rotate through the latest 100 local entries. A node's inclusion result can
-  disappear on a different branch; it is not irreversible settlement or a
-  multi-node finality proof. Errors retain the last known status and timestamps.
-- The API does not provide a global pending-incoming feed. Incoming funds appear
-  in the balance after inclusion. Unknown sends without a TX ID need manual checking.
-- Wallet minimum: **10 PROX + at least 0.1 PROX fee**, minimum total **10.1 PROX**.
-  This wallet enforces the amount and sets a 100,000-mote tag-along fee preference.
-  The actual fee is the larger of that preference and the sequencer requirement;
-  always review the final native confirmation. This is not a claim that every
-  network transaction has a fixed fee.
 
 ### Text import and OS compatibility
 
