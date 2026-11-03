@@ -86,7 +86,7 @@ check the node/recipient before retrying to avoid a duplicate payment.
    Timeouts after approval remain uncertain; check the node before trying again.
 
 
- ### v0.1.5****  delegate to sequencers feature has been added
+ ### v0.1.6  delegate to sequencers feature has been added
 Delegate to sequencer form under Delegations.
 Choose a specific sequencer ID or automatic selection.
 Set the PROX amount and minimum reward share.
