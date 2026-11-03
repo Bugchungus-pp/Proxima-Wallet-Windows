@@ -86,6 +86,15 @@ check the node/recipient before retrying to avoid a duplicate payment.
    Timeouts after approval remain uncertain; check the node before trying again.
 
 
+ ### v0.1.5****  delegate to sequencers feature has been added
+Delegate to sequencer form under Delegations.
+Choose a specific sequencer ID or automatic selection.
+Set the PROX amount and minimum reward share.
+Review the exact fee, total, target and freeze estimate before signing.
+Transaction/delegation receipts, duplicate warnings and cancellation safeguards.
+Existing unfreeze and withdrawal options retained.
+
+
 Passed 36 Node tests plus Electron regressions for real key/session handling,
 production balance parsing with mocked CLI reports, early-stop/withdrawal approval
 and cancellation, absent allowance rejection, frozen/foreign ID guards, lock during
