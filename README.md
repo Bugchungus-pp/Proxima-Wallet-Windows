@@ -87,12 +87,12 @@ check the node/recipient before retrying to avoid a duplicate payment.
 
 
  ### v0.1.6  delegate to sequencers feature has been added
-Delegate to sequencer form under Delegations.
-Choose a specific sequencer ID or automatic selection.
-Set the PROX amount and minimum reward share.
-Review the exact fee, total, target and freeze estimate before signing.
-Transaction/delegation receipts, duplicate warnings and cancellation safeguards.
-Existing unfreeze and withdrawal options retained.
+- Delegate to sequencer form under Delegations.
+- Choose a specific sequencer ID or automatic selection.
+- Set the PROX amount and minimum reward share.
+- Review the exact fee, total, target and freeze estimate before signing.
+- Transaction/delegation receipts, duplicate warnings and cancellation safeguards.
+- Existing unfreeze and withdrawal options retained.
 
 
 Passed 36 Node tests plus Electron regressions for real key/session handling,
